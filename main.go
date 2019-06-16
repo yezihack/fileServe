@@ -17,16 +17,17 @@ func main() {
 	path = flag.String("dir", "", "Please input your path")
 	port = flag.Int("port", 9999, "Please input your port")
 	ip := flag.String("ip", "", "test ip")
+	flag.Parse()
+	fmt.Println(*ip)
 	if !strings.EqualFold(*ip, "") {
 		fmt.Println(GetOutboundIP())
 		os.Exit(0)
 	}
-	flag.Parse()
 	if strings.EqualFold(*path, "") {
 		log.Fatal("your path is null, tip: -dir [dir]")
 	}
 	log.Println("File Serve start...")
-	log.Printf("Your are file addiress: http://%s:%d", GetOutboundIP(), port)
+	log.Printf("Your are file addiress: http://%s:%d", GetOutboundIP(), *port)
 	err := http.ListenAndServe(":"+strconv.Itoa(*port), http.FileServer(http.Dir(*path)))
 	if err != nil {
 		log.Fatal(err)
