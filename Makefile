@@ -3,5 +3,5 @@
 fmt:
 	gofmt -l -w ./
 
-dev:fmt
+install:fmt
 	go build -v -o output/fileServe ./
